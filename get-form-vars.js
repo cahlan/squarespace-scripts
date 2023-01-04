@@ -86,5 +86,7 @@ $("form").each((el) => {
   });
 });
 
-window.fields = fields;
-console.log("squarespace fields successfully indexed");
+window.sq_form_data = {
+  fields,
+};
+console.log("squarespace fields successfully indexed", window.sq_form_data);
