@@ -37,10 +37,13 @@ $("form").each((el) => {
     let v = { type: "name" };
     const i_first = $(this).find("input[name='fname']");
     v.first_name = i_first.val();
-    const i_last = $(this).find("input[name='fname']");
+    const i_last = $(this).find("input[name='lname']");
     v.last_name = i_last.val();
-    v.name = `${v.first_name} ${v.last_name}`;
+    v.full_name = `${v.first_name} ${v.last_name}`;
+    v.name = "Name";
     fields.push(v);
+    fields.push({ name: "First Name", type: "name", value: v.first_name });
+    fields.push({ name: "Last Name", type: "name", value: v.last_name });
   });
   //RADIO BUTTONS
   $("fieldset[id*='radio-']", el).each(function () {
@@ -86,7 +89,14 @@ $("form").each((el) => {
   });
 });
 
+//parse into object for easier access
+let d = {};
+for (let i = 0; i < fields.length; i++) {
+  d[fields[i].name] = fields[i];
+}
+
 window.sq_form_data = {
   fields,
+  data: d,
 };
 console.log("squarespace fields successfully indexed", window.sq_form_data);
